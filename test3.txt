@@ -1,0 +1,108 @@
+package studentsgradesanalyzer;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class tesst3 {
+	static ArrayList<String> list=new ArrayList<>();
+	public static void readFileByLines(String filename) throws IOException {
+		//按行读取文件中的内容
+		File file = new File(filename);
+		BufferedReader reader=null;
+		InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(file), "GBK");
+		reader = new BufferedReader(inputStreamReader);
+		//用reader.readLine()读出一行，并把成功读出的内容传给 tempString 字符串
+		String tempString = reader.readLine();
+		while((tempString = reader.readLine())!= null)
+		{
+		//把tempString里的内容存放到list中
+		list.add(tempString);
+		}
+		inputStreamReader.close();
+		reader.close();
+	}
+	
+	public static void main(String[] args) throws IOException {
+		//输入文件
+		Scanner sc = new Scanner(System.in);
+		   System.out.println("请输入输入文件:");
+		   String fileName = sc.nextLine();
+		   readFileByLines(fileName);
+		   //省份
+		  Scanner sc2 = new Scanner(System.in);
+		  System.out.println("请输入:");
+		  String loc0 = sc.nextLine();
+	      
+	      
+	    //输出文件
+		String[][] string = new String[list.size()][];
+		for(int i = 0;i<list.size();i++) 
+		{         
+			string[i] = list.get(i).split("\\s+");
+		}
+		Scanner sc1 = new Scanner(System.in);
+		   System.out.println("请输入输出文件:");
+		   String fileOut = sc.nextLine();
+		File file = new File(fileOut);
+		FileOutputStream out = new FileOutputStream(file);
+		OutputStreamWriter wr =new OutputStreamWriter(out);
+		
+		 
+		String loc1 = string[0][0];
+		String loc2 = string[12][0];
+		String loc3 = string[25][0];
+		String loc4 = string[46][0];
+		String loc5 = string[59][0];
+		String loc6 = string[73][0];
+		String loc7 = string[89][0];
+		String loc8 = string[102][0];
+		String loc9 = string[121][0];
+		
+		if(loc0.equals("浙江省")) {
+			loc0.equals(loc1);
+		}
+		else if(loc0.equals("江西省")) {
+			loc0.equals(loc2);
+		}
+		else if(loc0.equals("广东省")) {
+			loc0.equals(loc3);
+		}
+		else if(loc0.equals("江苏省")) {
+			loc0.equals(loc4);
+		}
+		else if(loc0.equals("湖南省")) {
+			loc0.equals(loc5);
+		}else if(loc0.equals("安徽省")) {
+			loc0.equals(loc6);
+		}else if(loc0.equals("陕西省")) {
+			loc0.equals(loc7);
+		}else if(loc0.equals("河南省")) {
+			loc0.equals(loc8);
+		}else if(loc0.equals("贵州省")) {
+			loc0.equals(loc9);
+		}
+		
+		    wr.write(loc0+"\r\n");//\r\n空行
+		   
+		for(int j =0 ;j < string.length;j++) 
+		{
+			
+		  if(string[j][0].equals(loc0))
+		  {  
+			  //用equals来判断第一列的省份是否与loc初始值“浙江省”匹配
+		   
+	        wr.write(string[j][1]+"               "+string[j][2]+"\r\n");      
+		  }	  	
+		}
+		wr.close();
+		
+   }
+}
